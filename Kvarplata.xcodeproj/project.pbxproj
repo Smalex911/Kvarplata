@@ -14,6 +14,7 @@
 		1F6A35862104F27E00402BDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A35842104F27E00402BDE /* LaunchScreen.storyboard */; };
 		1F6A358E21050A3100402BDE /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A358D21050A3100402BDE /* MainCell.swift */; };
 		1F6A359021050A3B00402BDE /* MainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A358F21050A3B00402BDE /* MainCell.xib */; };
+		F27524ED031B97301C13F61A /* Pods_Kvarplata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB04351EE789A81E91BE2086 /* Pods_Kvarplata.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,9 @@
 		1F6A35872104F27E00402BDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6A358D21050A3100402BDE /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		1F6A358F21050A3B00402BDE /* MainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCell.xib; sourceTree = "<group>"; };
+		6FD509F473391368C2781381 /* Pods-Kvarplata.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kvarplata.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata.release.xcconfig"; sourceTree = "<group>"; };
+		784FE6DF45E7FBBD966DEA6A /* Pods-Kvarplata.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kvarplata.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata.debug.xcconfig"; sourceTree = "<group>"; };
+		CB04351EE789A81E91BE2086 /* Pods_Kvarplata.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kvarplata.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F27524ED031B97301C13F61A /* Pods_Kvarplata.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +49,8 @@
 			children = (
 				1F6A357A2104F27C00402BDE /* Kvarplata */,
 				1F6A35792104F27C00402BDE /* Products */,
+				2417A76F86A78D6AC2C682C7 /* Pods */,
+				68823C845D33F22D5AF1B370 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +117,23 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		2417A76F86A78D6AC2C682C7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				784FE6DF45E7FBBD966DEA6A /* Pods-Kvarplata.debug.xcconfig */,
+				6FD509F473391368C2781381 /* Pods-Kvarplata.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		68823C845D33F22D5AF1B370 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB04351EE789A81E91BE2086 /* Pods_Kvarplata.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,9 +141,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F6A358A2104F27E00402BDE /* Build configuration list for PBXNativeTarget "Kvarplata" */;
 			buildPhases = (
+				25B8D3B8A0FCF5124FBE2C4A /* [CP] Check Pods Manifest.lock */,
 				1F6A35742104F27C00402BDE /* Sources */,
 				1F6A35752104F27C00402BDE /* Frameworks */,
 				1F6A35762104F27C00402BDE /* Resources */,
+				04AA68181C64E452E55A82A4 /* [CP] Embed Pods Frameworks */,
+				24DD61203E101203E3CEA1D1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,6 +203,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04AA68181C64E452E55A82A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		24DD61203E101203E3CEA1D1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		25B8D3B8A0FCF5124FBE2C4A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kvarplata-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F6A35742104F27C00402BDE /* Sources */ = {
@@ -326,15 +407,13 @@
 		};
 		1F6A358B2104F27E00402BDE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 784FE6DF45E7FBBD966DEA6A /* Pods-Kvarplata.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C538825TBW;
 				INFOPLIST_FILE = Kvarplata/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = alex.sm.Kvarplata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -344,15 +423,13 @@
 		};
 		1F6A358C2104F27E00402BDE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FD509F473391368C2781381 /* Pods-Kvarplata.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C538825TBW;
 				INFOPLIST_FILE = Kvarplata/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = alex.sm.Kvarplata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

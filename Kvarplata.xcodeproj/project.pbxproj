@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		1F00B7A8210E3DF90074D844 /* MetersData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7A7210E3DF90074D844 /* MetersData.swift */; };
 		1F00B7AA210E3FA70074D844 /* MetersDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7A9210E3FA70074D844 /* MetersDataInteractor.swift */; };
-		1F00B7AC210E402F0074D844 /* DbConnectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7AB210E402F0074D844 /* DbConnectionInteractor.swift */; };
+		1F00B7AC210E402F0074D844 /* DbConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7AB210E402F0074D844 /* DbConnection.swift */; };
+		1F00B7AE210E56BB0074D844 /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */; };
 		1F6A357C2104F27C00402BDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A357B2104F27C00402BDE /* AppDelegate.swift */; };
 		1F6A357E2104F27C00402BDE /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A357D2104F27C00402BDE /* MainVC.swift */; };
 		1F6A35812104F27C00402BDE /* MainVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A357F2104F27C00402BDE /* MainVC.storyboard */; };
@@ -17,13 +18,15 @@
 		1F6A35862104F27E00402BDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A35842104F27E00402BDE /* LaunchScreen.storyboard */; };
 		1F6A358E21050A3100402BDE /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A358D21050A3100402BDE /* MainCell.swift */; };
 		1F6A359021050A3B00402BDE /* MainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A358F21050A3B00402BDE /* MainCell.xib */; };
+		1FA54304210FAE69000DAE45 /* TextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA54303210FAE69000DAE45 /* TextProvider.swift */; };
 		F27524ED031B97301C13F61A /* Pods_Kvarplata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB04351EE789A81E91BE2086 /* Pods_Kvarplata.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1F00B7A7210E3DF90074D844 /* MetersData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetersData.swift; sourceTree = "<group>"; };
 		1F00B7A9210E3FA70074D844 /* MetersDataInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetersDataInteractor.swift; sourceTree = "<group>"; };
-		1F00B7AB210E402F0074D844 /* DbConnectionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbConnectionInteractor.swift; sourceTree = "<group>"; };
+		1F00B7AB210E402F0074D844 /* DbConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbConnection.swift; sourceTree = "<group>"; };
+		1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
 		1F6A35782104F27C00402BDE /* Kvarplata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kvarplata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6A357B2104F27C00402BDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F6A357D2104F27C00402BDE /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -33,6 +36,7 @@
 		1F6A35872104F27E00402BDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6A358D21050A3100402BDE /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		1F6A358F21050A3B00402BDE /* MainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCell.xib; sourceTree = "<group>"; };
+		1FA54303210FAE69000DAE45 /* TextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProvider.swift; sourceTree = "<group>"; };
 		6FD509F473391368C2781381 /* Pods-Kvarplata.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kvarplata.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata.release.xcconfig"; sourceTree = "<group>"; };
 		784FE6DF45E7FBBD966DEA6A /* Pods-Kvarplata.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kvarplata.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata.debug.xcconfig"; sourceTree = "<group>"; };
 		CB04351EE789A81E91BE2086 /* Pods_Kvarplata.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kvarplata.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +57,7 @@
 		1F00B7A5210E3D310074D844 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */,
 				1F00B7A6210E3D370074D844 /* Meters Data */,
 			);
 			path = Data;
@@ -107,7 +112,8 @@
 		1F6A359321051C2200402BDE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1F00B7AB210E402F0074D844 /* DbConnectionInteractor.swift */,
+				1F00B7AB210E402F0074D844 /* DbConnection.swift */,
+				1FA54303210FAE69000DAE45 /* TextProvider.swift */,
 				1F6A357B2104F27C00402BDE /* AppDelegate.swift */,
 				1F6A35822104F27E00402BDE /* Assets.xcassets */,
 				1F6A35842104F27E00402BDE /* LaunchScreen.storyboard */,
@@ -290,10 +296,12 @@
 			files = (
 				1F6A357E2104F27C00402BDE /* MainVC.swift in Sources */,
 				1F00B7A8210E3DF90074D844 /* MetersData.swift in Sources */,
-				1F00B7AC210E402F0074D844 /* DbConnectionInteractor.swift in Sources */,
+				1F00B7AC210E402F0074D844 /* DbConnection.swift in Sources */,
 				1F00B7AA210E3FA70074D844 /* MetersDataInteractor.swift in Sources */,
 				1F6A357C2104F27C00402BDE /* AppDelegate.swift in Sources */,
+				1FA54304210FAE69000DAE45 /* TextProvider.swift in Sources */,
 				1F6A358E21050A3100402BDE /* MainCell.swift in Sources */,
+				1F00B7AE210E56BB0074D844 /* BaseInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

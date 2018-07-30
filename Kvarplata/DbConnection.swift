@@ -1,5 +1,5 @@
 //
-//  DbConnectionInteractor.swift
+//  DbConnection.swift
 //  Kvarplata
 //
 //  Created by Александр Смородов on 29.07.2018.
@@ -9,13 +9,9 @@
 import SQLite
 import Foundation
 
-class DbConnectionInteractor {
+class DbConnection {
     
-    public static var shared = DbConnectionInteractor()
-    
-    var db : Connection? = nil
-    
-    init() {
+    public static var db : Connection? = {
         let path = NSSearchPathForDirectoriesInDomains(
             .applicationSupportDirectory, .userDomainMask, true
             ).first! + "/Offline Data"
@@ -24,14 +20,12 @@ class DbConnectionInteractor {
             try FileManager.default.createDirectory(
                 atPath: path, withIntermediateDirectories: true, attributes: nil
             )
-            
-            db = try Connection("\(path)/db.sqlite")
             NSLog("DB PATH: \(path)/db.sqlite")
-            
-            try MetersDataInteractor.createTable(db: db)
+            return try Connection("\(path)/db.sqlite")
         }
         catch let error as NSError {
             NSLog("\(error)")
+            return nil
         }
-    }
+    }()
 }

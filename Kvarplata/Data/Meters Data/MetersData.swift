@@ -19,6 +19,8 @@ class MetersData {
     public var cold_bath : Double?
     public var hot_bath : Double?
     
-    public var light_1 : Int64?
-    public var light_2 : Int64?
+    public var light_1 : Double?
+    public var light_2 : Double?
+    
+    public var creation_date : Int64?
 }

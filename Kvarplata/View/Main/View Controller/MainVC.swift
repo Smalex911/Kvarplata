@@ -13,7 +13,11 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var arrayData: [Int] = [1,2,3,4,5]
+    var arrayData: [MetersData] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +29,10 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         collectionView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
         
         style()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        arrayData = MetersDataInteractor.getAll()
     }
     
     func style() {
@@ -49,7 +57,8 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCell", for: indexPath) as! MainCell
+        cell.metersData = arrayData[indexPath.row]
         return cell
     }
     

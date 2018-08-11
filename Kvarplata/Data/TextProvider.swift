@@ -20,7 +20,7 @@ class TextProvider {
         guard let number = number else {
             return ""
         }
-        return String(format:"%.2f", number)
+        return String(format:"%.\(GlobalSettings.RoundSymbValues)f", number)
     }
     
     static func titleMainVC() -> String {

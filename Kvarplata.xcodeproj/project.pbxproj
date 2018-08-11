@@ -11,6 +11,7 @@
 		1F00B7AA210E3FA70074D844 /* MetersDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7A9210E3FA70074D844 /* MetersDataInteractor.swift */; };
 		1F00B7AC210E402F0074D844 /* DbConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7AB210E402F0074D844 /* DbConnection.swift */; };
 		1F00B7AE210E56BB0074D844 /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */; };
+		1F5EE7F9211F2DE100568C1E /* GlobalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5EE7F8211F2DE100568C1E /* GlobalSettings.swift */; };
 		1F6A357C2104F27C00402BDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A357B2104F27C00402BDE /* AppDelegate.swift */; };
 		1F6A357E2104F27C00402BDE /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A357D2104F27C00402BDE /* MainVC.swift */; };
 		1F6A35812104F27C00402BDE /* MainVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A357F2104F27C00402BDE /* MainVC.storyboard */; };
@@ -31,6 +32,7 @@
 		1F00B7A9210E3FA70074D844 /* MetersDataInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetersDataInteractor.swift; sourceTree = "<group>"; };
 		1F00B7AB210E402F0074D844 /* DbConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbConnection.swift; sourceTree = "<group>"; };
 		1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
+		1F5EE7F8211F2DE100568C1E /* GlobalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettings.swift; sourceTree = "<group>"; };
 		1F6A35782104F27C00402BDE /* Kvarplata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kvarplata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6A357B2104F27C00402BDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F6A357D2104F27C00402BDE /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -65,6 +67,10 @@
 		1F00B7A5210E3D310074D844 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1F00B7AB210E402F0074D844 /* DbConnection.swift */,
+				1F5EE7F8211F2DE100568C1E /* GlobalSettings.swift */,
+				1FA54303210FAE69000DAE45 /* TextProvider.swift */,
+				1FF4E1E0211F18B700497F71 /* ColorProvider.swift */,
 				1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */,
 				1FFEC2E1211EFA62005E0542 /* BaseVC.swift */,
 				1F00B7A6210E3D370074D844 /* Meters Data */,
@@ -121,9 +127,6 @@
 		1F6A359321051C2200402BDE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1F00B7AB210E402F0074D844 /* DbConnection.swift */,
-				1FA54303210FAE69000DAE45 /* TextProvider.swift */,
-				1FF4E1E0211F18B700497F71 /* ColorProvider.swift */,
 				1F6A357B2104F27C00402BDE /* AppDelegate.swift */,
 				1F6A35822104F27E00402BDE /* Assets.xcassets */,
 				1F6A35842104F27E00402BDE /* LaunchScreen.storyboard */,
@@ -328,6 +331,7 @@
 				1FA54307210FB4F1000DAE45 /* DetailMeterVC.swift in Sources */,
 				1F00B7AC210E402F0074D844 /* DbConnection.swift in Sources */,
 				1F00B7AA210E3FA70074D844 /* MetersDataInteractor.swift in Sources */,
+				1F5EE7F9211F2DE100568C1E /* GlobalSettings.swift in Sources */,
 				1F6A357C2104F27C00402BDE /* AppDelegate.swift in Sources */,
 				1FF4E1E1211F18B700497F71 /* ColorProvider.swift in Sources */,
 				1FA54304210FAE69000DAE45 /* TextProvider.swift in Sources */,

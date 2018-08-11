@@ -79,7 +79,7 @@ class DetailMeterVC: BaseVC {
         }
         
         for stepper in steppers {
-            stepper.stepValue = 0.1
+            stepper.stepValue = GlobalSettings.StepValue
         }
     }
     

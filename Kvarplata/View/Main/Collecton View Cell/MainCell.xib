@@ -178,7 +178,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="rvz-df-ooB" firstAttribute="centerY" secondItem="HyN-Iu-kU8" secondAttribute="centerY" id="mYO-rK-2rk"/>
                                     <constraint firstItem="rvz-df-ooB" firstAttribute="centerX" secondItem="HyN-Iu-kU8" secondAttribute="centerX" id="ntf-70-SoP"/>

@@ -70,4 +70,30 @@ class MetersDataInteractor : BaseInteractor {
             return []
         }
     }
+    
+    static func getLast() -> MetersData? {
+        guard let db = DbConnection.db else {
+            return nil
+        }
+        
+        do {
+            if let row = try db.pluck(table.order(creation_date.desc)) {
+                let item = MetersData()
+                item.month = row[month]
+                item.year = row[year]
+                item.cold_kitchen = row[cold_kitchen]
+                item.hot_kitchen = row[hot_kitchen]
+                item.cold_bath = row[cold_bath]
+                item.hot_bath = row[hot_bath]
+                item.light_1 = row[light_1]
+                item.light_2 = row[light_2]
+                item.creation_date = row[creation_date]
+                
+                return item
+            }
+            return nil
+        } catch {
+            return nil
+        }
+    }
 }

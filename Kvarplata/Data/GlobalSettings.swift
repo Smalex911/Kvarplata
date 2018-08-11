@@ -11,4 +11,5 @@ import UIKit
 class GlobalSettings {
     static var StepValue: Double = 0.01
     static var RoundSymbValues: Int = 2
+    static var SortInMain: SortInMainType = .monthsDesc
 }

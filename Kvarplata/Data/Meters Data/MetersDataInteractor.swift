@@ -8,6 +8,15 @@
 
 import SQLite
 
+enum SortInMainType {
+    case monthsDesc
+    case monthsAsc
+    case creationDateDesc
+    case creationDateAsc
+    case priceDesc
+    case priceAsc
+}
+
 class MetersDataInteractor : BaseInteractor {
     
     override class var table : Table {
@@ -51,7 +60,8 @@ class MetersDataInteractor : BaseInteractor {
         
         do {
             var list : [MetersData] = []
-            for row in try db.prepare(table) {
+            
+            for row in try db.prepare(sortedInMainTable()) {
                 let item = MetersData()
                 item.month = row[month]
                 item.year = row[year]
@@ -68,6 +78,23 @@ class MetersDataInteractor : BaseInteractor {
             return list
         } catch {
             return []
+        }
+    }
+    
+    private static func sortedInMainTable() -> Table {
+        switch GlobalSettings.SortInMain {
+        case .monthsDesc:
+            return table.order(year.desc, month.desc)
+        case .monthsAsc:
+            return table.order(year.asc, month.asc)
+        case .creationDateDesc:
+            return table.order(creation_date.desc)
+        case .creationDateAsc:
+            return table.order(creation_date.asc)
+        case .priceDesc:
+            return table
+        case .priceAsc:
+            return table
         }
     }
     
@@ -95,5 +122,18 @@ class MetersDataInteractor : BaseInteractor {
         } catch {
             return nil
         }
+    }
+    
+    static func add(md: MetersData) {
+        _ = try? DbConnection.db?.run(table.insert(or: .replace,
+                                               month <- md.month,
+                                               year <- md.year,
+                                               cold_kitchen <- md.cold_kitchen,
+                                               hot_kitchen <- md.hot_kitchen,
+                                               cold_bath <- md.cold_bath,
+                                               hot_bath <- md.hot_bath,
+                                               light_1 <- md.light_1,
+                                               light_2 <- md.light_2,
+                                               creation_date <- md.creation_date))
     }
 }

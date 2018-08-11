@@ -153,6 +153,19 @@ class DetailMeterVC: BaseVC {
     }
     
     @IBAction func saveHandler(_ sender: Any) {
+        let md = MetersData()
+        md.year = 2018
+        md.month = 8
+        md.cold_kitchen = Double(textFieldWaterKitchenCold.text ?? "")
+        md.hot_kitchen = Double(textFieldWaterKitchenCold.text ?? "")
+        md.cold_bath = Double(textFieldWaterBathCold.text ?? "")
+        md.hot_bath = Double(textFieldWaterBathHot.text ?? "")
+        md.light_1 = Double(textFieldLightT1.text ?? "")
+        md.light_2 = Double(textFieldLightT2.text ?? "")
+        md.creation_date = Int64(Date().timeIntervalSince1970)
+        
+        MetersDataInteractor.add(md: md)
+        
         self.navigationController?.popViewController(animated: true)
     }
 }

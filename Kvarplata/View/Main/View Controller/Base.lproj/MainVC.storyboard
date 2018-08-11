@@ -161,7 +161,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="2nU-h4-xs1">
                         <barButtonItem key="leftBarButtonItem" title="Настройки" id="8gn-Dd-63S"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jHI-7z-ZKb"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jHI-7z-ZKb">
+                            <connections>
+                                <action selector="addHandler:" destination="kjg-hN-I23" id="Sob-Lo-2D1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="CDd-ey-0MB" id="hZf-x9-Q4Z"/>

@@ -22,4 +22,16 @@ class TextProvider {
         }
         return String(format:"%.2f", number)
     }
+    
+    static func titleMainVC() -> String {
+        return "Показания"
+    }
+    
+    static func titleEdit() -> String {
+        return "Изменение"
+    }
+    
+    static func titleAdd() -> String {
+        return "Добавление"
+    }
 }

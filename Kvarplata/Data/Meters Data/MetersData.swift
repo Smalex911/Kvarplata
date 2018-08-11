@@ -23,4 +23,14 @@ class MetersData {
     public var light_2 : Double?
     
     public var creation_date : Int64?
+    
+    //New
+    
+    public var price_cold_water : Double?
+    public var price_hot_water : Double?
+    
+    public var price_light_1 : Double?
+    public var price_light_2 : Double?
+    
+    public var is_sent_email : Bool?
 }

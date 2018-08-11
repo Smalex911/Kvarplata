@@ -19,6 +19,9 @@
 		1F6A358E21050A3100402BDE /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A358D21050A3100402BDE /* MainCell.swift */; };
 		1F6A359021050A3B00402BDE /* MainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A358F21050A3B00402BDE /* MainCell.xib */; };
 		1FA54304210FAE69000DAE45 /* TextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA54303210FAE69000DAE45 /* TextProvider.swift */; };
+		1FA54307210FB4F1000DAE45 /* DetailMeterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA54306210FB4F1000DAE45 /* DetailMeterVC.swift */; };
+		1FA54309210FB4FB000DAE45 /* DetailMeterVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA54308210FB4FB000DAE45 /* DetailMeterVC.storyboard */; };
+		1FFEC2E2211EFA62005E0542 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFEC2E1211EFA62005E0542 /* BaseVC.swift */; };
 		F27524ED031B97301C13F61A /* Pods_Kvarplata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB04351EE789A81E91BE2086 /* Pods_Kvarplata.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +40,9 @@
 		1F6A358D21050A3100402BDE /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		1F6A358F21050A3B00402BDE /* MainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCell.xib; sourceTree = "<group>"; };
 		1FA54303210FAE69000DAE45 /* TextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProvider.swift; sourceTree = "<group>"; };
+		1FA54306210FB4F1000DAE45 /* DetailMeterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMeterVC.swift; sourceTree = "<group>"; };
+		1FA54308210FB4FB000DAE45 /* DetailMeterVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailMeterVC.storyboard; sourceTree = "<group>"; };
+		1FFEC2E1211EFA62005E0542 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6FD509F473391368C2781381 /* Pods-Kvarplata.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kvarplata.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata.release.xcconfig"; sourceTree = "<group>"; };
 		784FE6DF45E7FBBD966DEA6A /* Pods-Kvarplata.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kvarplata.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kvarplata/Pods-Kvarplata.debug.xcconfig"; sourceTree = "<group>"; };
 		CB04351EE789A81E91BE2086 /* Pods_Kvarplata.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kvarplata.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */,
+				1FFEC2E1211EFA62005E0542 /* BaseVC.swift */,
 				1F00B7A6210E3D370074D844 /* Meters Data */,
 			);
 			path = Data;
@@ -134,6 +141,7 @@
 		1F6A359521051C8A00402BDE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1FA54305210FB3CF000DAE45 /* DetailMeter */,
 				1F6A359621051C9900402BDE /* Main */,
 			);
 			path = View;
@@ -146,6 +154,23 @@
 				1F6A359121051BA100402BDE /* Collecton View Cell */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		1FA54305210FB3CF000DAE45 /* DetailMeter */ = {
+			isa = PBXGroup;
+			children = (
+				1FA5430A210FB522000DAE45 /* View Controller */,
+			);
+			path = DetailMeter;
+			sourceTree = "<group>";
+		};
+		1FA5430A210FB522000DAE45 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1FA54308210FB4FB000DAE45 /* DetailMeterVC.storyboard */,
+				1FA54306210FB4F1000DAE45 /* DetailMeterVC.swift */,
+			);
+			path = "View Controller";
 			sourceTree = "<group>";
 		};
 		2417A76F86A78D6AC2C682C7 /* Pods */ = {
@@ -227,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F6A35862104F27E00402BDE /* LaunchScreen.storyboard in Resources */,
+				1FA54309210FB4FB000DAE45 /* DetailMeterVC.storyboard in Resources */,
 				1F6A35832104F27E00402BDE /* Assets.xcassets in Resources */,
 				1F6A359021050A3B00402BDE /* MainCell.xib in Resources */,
 				1F6A35812104F27C00402BDE /* MainVC.storyboard in Resources */,
@@ -296,12 +322,14 @@
 			files = (
 				1F6A357E2104F27C00402BDE /* MainVC.swift in Sources */,
 				1F00B7A8210E3DF90074D844 /* MetersData.swift in Sources */,
+				1FA54307210FB4F1000DAE45 /* DetailMeterVC.swift in Sources */,
 				1F00B7AC210E402F0074D844 /* DbConnection.swift in Sources */,
 				1F00B7AA210E3FA70074D844 /* MetersDataInteractor.swift in Sources */,
 				1F6A357C2104F27C00402BDE /* AppDelegate.swift in Sources */,
 				1FA54304210FAE69000DAE45 /* TextProvider.swift in Sources */,
 				1F6A358E21050A3100402BDE /* MainCell.swift in Sources */,
 				1F00B7AE210E56BB0074D844 /* BaseInteractor.swift in Sources */,
+				1FFEC2E2211EFA62005E0542 /* BaseVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

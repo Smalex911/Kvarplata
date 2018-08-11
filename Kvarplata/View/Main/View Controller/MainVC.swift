@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MainVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -36,6 +36,9 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func style() {
+        
+        title = TextProvider.titleMainVC()
+        
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
@@ -44,6 +47,10 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         blurEffectView.frame = headerView.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         headerView.insertSubview(blurEffectView, at: 0)
+    }
+    
+    @IBAction func addHandler(_ sender: Any) {
+        _ = showDetailMeterVC()
     }
     
 // Collection View

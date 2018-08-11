@@ -168,8 +168,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="blurNavBarView" destination="AUX-z6-PWa" id="ZxR-ZD-D7E"/>
                         <outlet property="collectionView" destination="CDd-ey-0MB" id="hZf-x9-Q4Z"/>
-                        <outlet property="headerView" destination="AUX-z6-PWa" id="gQ7-yH-obN"/>
+                        <outlet property="heightBlurNavBarView" destination="9EX-Pr-VaG" id="PEe-kq-lZT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wct-ZP-xCl" userLabel="First Responder" sceneMemberID="firstResponder"/>

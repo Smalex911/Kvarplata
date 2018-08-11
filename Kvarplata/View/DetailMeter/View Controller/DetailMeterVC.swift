@@ -10,13 +10,31 @@ import UIKit
 
 class DetailMeterVC: BaseVC {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        style()
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var buttonSave: UIButton!
+    
+    override func heightBlurHeaderView() -> CGFloat {
+        return 40
     }
     
-    func style() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func style() {
+        super.style()
+        
         title = TextProvider.titleAdd()
+        
+        buttonSave.backgroundColor = ColorProvider.greenLight
+        buttonSave.tintColor = ColorProvider.greenDark
+    }
+    
+    override func scrollViewBase() -> UIScrollView? {
+        return scrollView
+    }
+    
+    @IBAction func saveHandler(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

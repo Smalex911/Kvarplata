@@ -10,13 +10,16 @@ import UIKit
 
 class MainVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     var arrayData: [MetersData] = [] {
         didSet {
             collectionView.reloadData()
         }
+    }
+    
+    override func heightBlurHeaderView() -> CGFloat {
+        return 40
     }
     
     override func viewDidLoad() {
@@ -27,26 +30,16 @@ class MainVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource, UICo
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
-        
-        style()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         arrayData = MetersDataInteractor.getAll()
     }
     
-    func style() {
+    override func style() {
+        super.style()
         
         title = TextProvider.titleMainVC()
-        
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = headerView.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        headerView.insertSubview(blurEffectView, at: 0)
     }
     
     @IBAction func addHandler(_ sender: Any) {

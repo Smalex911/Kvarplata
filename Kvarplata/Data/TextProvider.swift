@@ -20,7 +20,7 @@ class TextProvider {
         guard let number = number else {
             return ""
         }
-        return String(format:"%.\(GlobalSettings.RoundSymbValues)f", number).replacingOccurrences(of: ".", with: ",")
+        return String(format:"%.\(GlobalSettings.RoundSymbValues)f", number).fromSave()
     }
     
     static func titleMainVC() -> String {

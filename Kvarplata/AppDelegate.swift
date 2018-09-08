@@ -64,3 +64,28 @@ extension UIColor {
     }
 }
 
+extension UITextField {
+    func isNullOrEmpty() -> Bool {
+        return text == nil || text == ""
+    }
+    
+    func value() -> Double? {
+        if let value = Double(text ?? "") {
+            return value
+        }
+        if let value = Double(text?.toSave() ?? "") {
+            return value
+        }
+        return nil
+    }
+}
+
+extension String {
+    func toSave() -> String {
+        return replacingOccurrences(of: ",", with: ".")
+    }
+    func fromSave() -> String {
+        return replacingOccurrences(of: ".", with: ",")
+    }
+}
+

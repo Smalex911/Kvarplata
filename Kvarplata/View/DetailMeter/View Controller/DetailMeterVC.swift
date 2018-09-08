@@ -164,12 +164,12 @@ class DetailMeterVC: BaseVC {
         let md = MetersData()
         md.year = 2018
         md.month = 8
-        md.cold_kitchen = Double(textFieldWaterKitchenCold.text ?? "")
-        md.hot_kitchen = Double(textFieldWaterKitchenHot.text ?? "")
-        md.cold_bath = Double(textFieldWaterBathCold.text ?? "")
-        md.hot_bath = Double(textFieldWaterBathHot.text ?? "")
-        md.light_1 = Double(textFieldLightT1.text ?? "")
-        md.light_2 = Double(textFieldLightT2.text ?? "")
+        md.cold_kitchen = textFieldWaterKitchenCold.value()
+        md.hot_kitchen = textFieldWaterKitchenHot.value()
+        md.cold_bath = textFieldWaterBathCold.value()
+        md.hot_bath = textFieldWaterBathHot.value()
+        md.light_1 = textFieldLightT1.value()
+        md.light_2 = textFieldLightT2.value()
         md.creation_date = Int64(Date().timeIntervalSince1970)
         
         MetersDataInteractor.add(md: md)
@@ -181,6 +181,40 @@ class DetailMeterVC: BaseVC {
 extension DetailMeterVC: MFMailComposeViewControllerDelegate {
     
     func sendEmail() {
+        let t1ToSave = textFieldLightT1.value()
+        let t2ToSave = textFieldLightT1.value()
+        let kcToSave = textFieldWaterKitchenCold.value()
+        let bcToSave = textFieldWaterBathCold.value()
+        let khToSave = textFieldWaterKitchenHot.value()
+        let bhToSave = textFieldWaterBathHot.value()
+        
+        let compiledTextMessage = { () -> String in
+            var message = "\(GlobalSettings.fioSender), кв.\(GlobalSettings.flatNumber)"
+            message += "<br>"
+            if let t1 = self.textFieldLightT1.text, t1 != "", t1ToSave != nil {
+                message += "<br>T1: \(t1)"
+            }
+            if let t2 = self.textFieldLightT2.text, t2 != "", t2ToSave != nil {
+                message += "<br>T2: \(t2)"
+            }
+            if !self.textFieldLightT1.isNullOrEmpty() || !self.textFieldLightT2.isNullOrEmpty() {
+                message += "<br>"
+            }
+            if let kc = self.textFieldWaterKitchenCold.text, kc != "", kcToSave != nil {
+                message += "<br>ХВС кухня: \(kc)"
+            }
+            if let bc = self.textFieldWaterBathCold.text, bc != "", bcToSave != nil {
+                message += "<br>ХВС ванная: \(bc)"
+            }
+            if let kh = self.textFieldWaterKitchenHot.text, kh != "", khToSave != nil {
+                message += "<br>ГВС кухня: \(kh)"
+            }
+            if let bh = self.textFieldWaterBathHot.text, bh != "", bhToSave != nil {
+                message += "<br>ГВС ванная: \(bh)"
+            }
+            return message
+        }
+        
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
@@ -196,39 +230,13 @@ extension DetailMeterVC: MFMailComposeViewControllerDelegate {
         }
     }
     
-    func compiledTextMessage() -> String {
-        var message = "\(GlobalSettings.fioSender), кв.\(GlobalSettings.flatNumber)"
-        message += "<br>"
-        if let t1 = textFieldLightT1.text, t1 != "" {
-            message += "<br>T1: \(t1)"
-        }
-        if let t2 = textFieldLightT2.text, t2 != "" {
-            message += "<br>T2: \(t2)"
-        }
-        if textFieldLightT1.text != nil && textFieldLightT1.text != "" || textFieldLightT2.text != nil && textFieldLightT2.text != "" {
-            message += "<br>"
-        }
-        if let kc = textFieldWaterKitchenCold.text, kc != "" {
-            message += "<br>ХВС кухня: \(kc)"
-        }
-        if let bc = textFieldWaterBathCold.text, bc != "" {
-            message += "<br>ХВС ванная: \(bc)"
-        }
-        if let kh = textFieldWaterKitchenHot.text, kh != "" {
-            message += "<br>ГВС кухня: \(kh)"
-        }
-        if let bh = textFieldWaterBathHot.text, bh != "" {
-            message += "<br>ГВС ванная: \(bh)"
-        }
-        return message
-    }
-    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
         
         if result == .sent {
             let alert = UIAlertController(title: TextProvider.alertSendedTitle(), message: TextProvider.alertSendedMsg(), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: TextProvider.ok(), style: .default) { [weak self] (alert) in
+                self?.saveHandler()
                 self?.navigationController?.popViewController(animated: true)
             })
             self.present(alert, animated: true, completion: nil)

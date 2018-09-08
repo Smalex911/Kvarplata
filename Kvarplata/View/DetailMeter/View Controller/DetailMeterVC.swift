@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class DetailMeterVC: BaseVC {
     
@@ -47,7 +48,7 @@ class DetailMeterVC: BaseVC {
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet var steppers: [UIStepper]!
     
-    @IBOutlet weak var buttonSave: UIButton!
+    @IBOutlet weak var buttonSend: UIButton!
     
     var lastMetersData: MetersData?
     
@@ -71,8 +72,11 @@ class DetailMeterVC: BaseVC {
         
         title = TextProvider.titleAdd()
         
-        buttonSave.backgroundColor = ColorProvider.greenLight
-        buttonSave.tintColor = ColorProvider.greenDark
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(saveHandler))
+        navigationItem.setRightBarButton(barButtonItem, animated: false)
+        
+        buttonSend.backgroundColor = ColorProvider.greenLight
+        buttonSend.tintColor = ColorProvider.greenDark
         
         for textField in textFields {
             textField.keyboardType = .decimalPad
@@ -152,12 +156,16 @@ class DetailMeterVC: BaseVC {
         }
     }
     
-    @IBAction func saveHandler(_ sender: Any) {
+    @IBAction func sendHandler(_ sender: Any) {
+        sendEmail()
+    }
+    
+    @objc func saveHandler() {
         let md = MetersData()
         md.year = 2018
         md.month = 8
         md.cold_kitchen = Double(textFieldWaterKitchenCold.text ?? "")
-        md.hot_kitchen = Double(textFieldWaterKitchenCold.text ?? "")
+        md.hot_kitchen = Double(textFieldWaterKitchenHot.text ?? "")
         md.cold_bath = Double(textFieldWaterBathCold.text ?? "")
         md.hot_bath = Double(textFieldWaterBathHot.text ?? "")
         md.light_1 = Double(textFieldLightT1.text ?? "")
@@ -167,5 +175,67 @@ class DetailMeterVC: BaseVC {
         MetersDataInteractor.add(md: md)
         
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension DetailMeterVC: MFMailComposeViewControllerDelegate {
+    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([GlobalSettings.mailRecipient])
+            mail.setSubject(GlobalSettings.topic)
+            mail.setMessageBody(compiledTextMessage(), isHTML: true)
+            
+            present(mail, animated: true)
+        } else {
+            let alert = UIAlertController(title: TextProvider.alertNotSendTitle(), message: TextProvider.alertNotSendMsg(), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: TextProvider.great(), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func compiledTextMessage() -> String {
+        var message = "\(GlobalSettings.fioSender), кв.\(GlobalSettings.flatNumber)"
+        message += "<br>"
+        if let t1 = textFieldLightT1.text, t1 != "" {
+            message += "<br>T1: \(t1)"
+        }
+        if let t2 = textFieldLightT2.text, t2 != "" {
+            message += "<br>T2: \(t2)"
+        }
+        if textFieldLightT1.text != nil && textFieldLightT1.text != "" || textFieldLightT2.text != nil && textFieldLightT2.text != "" {
+            message += "<br>"
+        }
+        if let kc = textFieldWaterKitchenCold.text, kc != "" {
+            message += "<br>ХВС кухня: \(kc)"
+        }
+        if let bc = textFieldWaterBathCold.text, bc != "" {
+            message += "<br>ХВС ванная: \(bc)"
+        }
+        if let kh = textFieldWaterKitchenHot.text, kh != "" {
+            message += "<br>ГВС кухня: \(kh)"
+        }
+        if let bh = textFieldWaterBathHot.text, bh != "" {
+            message += "<br>ГВС ванная: \(bh)"
+        }
+        return message
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+        
+        if result == .sent {
+            let alert = UIAlertController(title: TextProvider.alertSendedTitle(), message: TextProvider.alertSendedMsg(), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: TextProvider.ok(), style: .default) { [weak self] (alert) in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            self.present(alert, animated: true, completion: nil)
+        } else if result == .failed {
+            let alert = UIAlertController(title: TextProvider.alertNotSendTitle(), message: TextProvider.alertSendErrorMsg(), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: TextProvider.great(), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

@@ -20,7 +20,7 @@ class TextProvider {
         guard let number = number else {
             return ""
         }
-        return String(format:"%.\(GlobalSettings.RoundSymbValues)f", number)
+        return String(format:"%.\(GlobalSettings.RoundSymbValues)f", number).replacingOccurrences(of: ".", with: ",")
     }
     
     static func titleMainVC() -> String {
@@ -33,5 +33,34 @@ class TextProvider {
     
     static func titleAdd() -> String {
         return "Добавление"
+    }
+    
+    static func alertSendedTitle() -> String {
+        return "Успех"
+    }
+    static func alertSendedMsg() -> String {
+        return "Ваше сообщение было успешно отправлено"
+    }
+    
+    static func defaultMail() -> String {
+//        return "dom-drujba.101@yandex.ru"
+        return "Alex11Sm@mail.ru"
+    }
+    
+    static func alertNotSendTitle() -> String {
+        return "Ошибка отправления"
+    }
+    static func alertNotSendMsg() -> String {
+        return "К сожалению, ваше устройство не поддерживается для отправки email сообщений. Вы можете самостоятельно отправить его, или сохранить результат в приложении"
+    }
+    static func alertSendErrorMsg() -> String {
+        return "К сожалению, возникла ошибка при отправлении сообщения, пожалуйста попробуйте снова"
+    }
+    
+    static func great() -> String {
+        return "Хорошо"
+    }
+    static func ok() -> String {
+        return "ОК"
     }
 }

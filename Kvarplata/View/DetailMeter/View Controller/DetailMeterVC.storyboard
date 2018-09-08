@@ -290,9 +290,9 @@
                                                         <rect key="frame" x="16" y="18" width="343" height="44"/>
                                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                        <state key="normal" title="Сохранить"/>
+                                                        <state key="normal" title="Отправить"/>
                                                         <connections>
-                                                            <action selector="saveHandler:" destination="F5r-Po-NtD" eventType="touchUpInside" id="Glt-Lm-58Y"/>
+                                                            <action selector="sendHandler:" destination="F5r-Po-NtD" eventType="touchUpInside" id="cmm-R0-Z1p"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -364,7 +364,7 @@
                     <connections>
                         <outlet property="blurNavBarView" destination="9RC-DG-qgC" id="IQX-zJ-VSy"/>
                         <outlet property="buttonLoadLastSave" destination="oi6-bk-IlG" id="LSv-Oj-nt4"/>
-                        <outlet property="buttonSave" destination="VXt-LA-tlx" id="UUB-Ti-jIn"/>
+                        <outlet property="buttonSend" destination="VXt-LA-tlx" id="MfO-si-LKU"/>
                         <outlet property="heightBlurNavBarView" destination="Vvm-CS-68t" id="f7d-la-GDO"/>
                         <outlet property="labelLightT1OldTitle" destination="CGp-mx-0oe" id="bqI-j7-KCq"/>
                         <outlet property="labelLightT1Title" destination="pf9-5f-4mM" id="pKU-FR-PRD"/>

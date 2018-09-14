@@ -47,6 +47,18 @@ class TextProvider {
         return "Сохранить"
     }
     
+    static func send() -> String {
+        return "Отправить"
+    }
+    
+    static func edit() -> String {
+        return "Изменить"
+    }
+    
+    static func delete() -> String {
+        return "Удалить"
+    }
+    
     static func alertSendedTitle() -> String {
         return "Успех"
     }

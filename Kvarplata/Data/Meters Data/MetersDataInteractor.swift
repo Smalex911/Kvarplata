@@ -63,6 +63,7 @@ class MetersDataInteractor : BaseInteractor {
             
             for row in try db.prepare(sortedInMainTable()) {
                 let item = MetersData()
+                item.id = row[id]
                 item.month = row[month]
                 item.year = row[year]
                 item.cold_kitchen = row[cold_kitchen]
@@ -126,14 +127,34 @@ class MetersDataInteractor : BaseInteractor {
     
     static func add(md: MetersData) {
         _ = try? DbConnection.db?.run(table.insert(or: .replace,
-                                               month <- md.month,
-                                               year <- md.year,
-                                               cold_kitchen <- md.cold_kitchen,
-                                               hot_kitchen <- md.hot_kitchen,
-                                               cold_bath <- md.cold_bath,
-                                               hot_bath <- md.hot_bath,
-                                               light_1 <- md.light_1,
-                                               light_2 <- md.light_2,
-                                               creation_date <- md.creation_date))
+                                                   month <- md.month,
+                                                   year <- md.year,
+                                                   cold_kitchen <- md.cold_kitchen,
+                                                   hot_kitchen <- md.hot_kitchen,
+                                                   cold_bath <- md.cold_bath,
+                                                   hot_bath <- md.hot_bath,
+                                                   light_1 <- md.light_1,
+                                                   light_2 <- md.light_2,
+                                                   creation_date <- md.creation_date))
+    }
+    
+    static func update(md: MetersData) {
+        if let _id = md.id {
+            _ = try? DbConnection.db?.run(table.filter(id == _id).update(month <- md.month,
+                                                                         year <- md.year,
+                                                                         cold_kitchen <- md.cold_kitchen,
+                                                                         hot_kitchen <- md.hot_kitchen,
+                                                                         cold_bath <- md.cold_bath,
+                                                                         hot_bath <- md.hot_bath,
+                                                                         light_1 <- md.light_1,
+                                                                         light_2 <- md.light_2,
+                                                                         creation_date <- md.creation_date))
+        }
+    }
+    
+    static func delete(md: MetersData) {
+        if let _id = md.id {
+            _ = try? DbConnection.db?.run(table.filter(id == _id).delete())
+        }
     }
 }

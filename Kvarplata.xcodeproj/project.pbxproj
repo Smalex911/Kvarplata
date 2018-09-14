@@ -11,6 +11,9 @@
 		1F00B7AA210E3FA70074D844 /* MetersDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7A9210E3FA70074D844 /* MetersDataInteractor.swift */; };
 		1F00B7AC210E402F0074D844 /* DbConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7AB210E402F0074D844 /* DbConnection.swift */; };
 		1F00B7AE210E56BB0074D844 /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */; };
+		1F45A9E1214C53B3008397A7 /* AbstractRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A9E0214C53B3008397A7 /* AbstractRouter.swift */; };
+		1F45A9E4214C5462008397A7 /* BaseNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A9E3214C5462008397A7 /* BaseNVC.swift */; };
+		1F45A9E7214C54A6008397A7 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A9E6214C54A6008397A7 /* Router.swift */; };
 		1F5EE7F9211F2DE100568C1E /* GlobalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5EE7F8211F2DE100568C1E /* GlobalSettings.swift */; };
 		1F6A357C2104F27C00402BDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A357B2104F27C00402BDE /* AppDelegate.swift */; };
 		1F6A357E2104F27C00402BDE /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A357D2104F27C00402BDE /* MainVC.swift */; };
@@ -32,6 +35,9 @@
 		1F00B7A9210E3FA70074D844 /* MetersDataInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetersDataInteractor.swift; sourceTree = "<group>"; };
 		1F00B7AB210E402F0074D844 /* DbConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbConnection.swift; sourceTree = "<group>"; };
 		1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
+		1F45A9E0214C53B3008397A7 /* AbstractRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractRouter.swift; sourceTree = "<group>"; };
+		1F45A9E3214C5462008397A7 /* BaseNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNVC.swift; sourceTree = "<group>"; };
+		1F45A9E6214C54A6008397A7 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		1F5EE7F8211F2DE100568C1E /* GlobalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettings.swift; sourceTree = "<group>"; };
 		1F6A35782104F27C00402BDE /* Kvarplata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kvarplata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6A357B2104F27C00402BDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +78,6 @@
 				1FA54303210FAE69000DAE45 /* TextProvider.swift */,
 				1FF4E1E0211F18B700497F71 /* ColorProvider.swift */,
 				1F00B7AD210E56BB0074D844 /* BaseInteractor.swift */,
-				1FFEC2E1211EFA62005E0542 /* BaseVC.swift */,
 				1F00B7A6210E3D370074D844 /* Meters Data */,
 			);
 			path = Data;
@@ -85,6 +90,24 @@
 				1F00B7A9210E3FA70074D844 /* MetersDataInteractor.swift */,
 			);
 			path = "Meters Data";
+			sourceTree = "<group>";
+		};
+		1F45A9E2214C543A008397A7 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				1F45A9E0214C53B3008397A7 /* AbstractRouter.swift */,
+				1F45A9E3214C5462008397A7 /* BaseNVC.swift */,
+				1FFEC2E1211EFA62005E0542 /* BaseVC.swift */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		1F45A9E5214C5495008397A7 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				1F45A9E6214C54A6008397A7 /* Router.swift */,
+			);
+			path = Routing;
 			sourceTree = "<group>";
 		};
 		1F6A356F2104F27C00402BDE = {
@@ -108,6 +131,8 @@
 		1F6A357A2104F27C00402BDE /* Kvarplata */ = {
 			isa = PBXGroup;
 			children = (
+				1F45A9E2214C543A008397A7 /* Libs */,
+				1F45A9E5214C5495008397A7 /* Routing */,
 				1F00B7A5210E3D310074D844 /* Data */,
 				1F6A359521051C8A00402BDE /* View */,
 				1F6A359321051C2200402BDE /* Resources */,
@@ -333,10 +358,13 @@
 				1F00B7AA210E3FA70074D844 /* MetersDataInteractor.swift in Sources */,
 				1F5EE7F9211F2DE100568C1E /* GlobalSettings.swift in Sources */,
 				1F6A357C2104F27C00402BDE /* AppDelegate.swift in Sources */,
+				1F45A9E7214C54A6008397A7 /* Router.swift in Sources */,
 				1FF4E1E1211F18B700497F71 /* ColorProvider.swift in Sources */,
 				1FA54304210FAE69000DAE45 /* TextProvider.swift in Sources */,
+				1F45A9E1214C53B3008397A7 /* AbstractRouter.swift in Sources */,
 				1F6A358E21050A3100402BDE /* MainCell.swift in Sources */,
 				1F00B7AE210E56BB0074D844 /* BaseInteractor.swift in Sources */,
+				1F45A9E4214C5462008397A7 /* BaseNVC.swift in Sources */,
 				1FFEC2E2211EFA62005E0542 /* BaseVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

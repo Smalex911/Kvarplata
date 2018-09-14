@@ -69,5 +69,9 @@ class MainVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Router.shared.detailMeters(self, metersData: arrayData[indexPath.row])
+    }
 }
 

@@ -9,6 +9,11 @@
 import UIKit
 import MessageUI
 
+enum DetailMeterState {
+    case new
+    case edit
+}
+
 class DetailMeterVC: BaseVC {
     
     @IBOutlet weak var buttonLoadLastSave: UIButton!
@@ -52,15 +57,53 @@ class DetailMeterVC: BaseVC {
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet var steppers: [UIStepper]!
     
-    @IBOutlet weak var buttonSend: UIButton!
+    @IBOutlet weak var buttonSendOrEdit: UIButton!
+    
+    var state: DetailMeterState = .new
     
     var lastMetersData: MetersData?
+    
+    var currentMetersData: MetersData? {
+        didSet {
+            if let year = currentMetersData?.year, let y = Int(exactly: year) {
+                currentYear = y
+            }
+            if let month = currentMetersData?.month, let m = Int(exactly: month) {
+                currentMonth = m
+            }
+        }
+    }
+    var (currentMonth, currentYear) = TextProvider.getCurrentMonthAndYear()
     
     override func heightBlurHeaderView() -> CGFloat {
         return 40
     }
     
-    var (currentMonth, currentYear) = TextProvider.getCurrentMonthAndYear()
+    func set(metersData: MetersData) {
+        textFieldWaterKitchenCold.text = TextProvider.roundTwoSymbols(metersData.cold_kitchen)
+        stepperWaterKitchenCold.value = metersData.cold_kitchen ?? 0
+        textFieldWaterKitchenHot.text = TextProvider.roundTwoSymbols(metersData.hot_kitchen)
+        stepperWaterKitchenHot.value = metersData.hot_kitchen ?? 0
+        
+        textFieldWaterBathCold.text = TextProvider.roundTwoSymbols(metersData.cold_bath)
+        stepperWaterBathCold.value = metersData.cold_bath ?? 0
+        textFieldWaterBathHot.text = TextProvider.roundTwoSymbols(metersData.hot_bath)
+        stepperWaterBathHot.value = metersData.hot_bath ?? 0
+        
+        textFieldLightT1.text = TextProvider.roundTwoSymbols(metersData.light_1)
+        stepperLightT1.value = metersData.light_1 ?? 0
+        textFieldLightT2.text = TextProvider.roundTwoSymbols(metersData.light_2)
+        stepperLightT2.value = metersData.light_2 ?? 0
+    }
+    
+    func set(oldMetersData: MetersData?) {
+        labelWaterKitchenColdOldTitle.text = TextProvider.roundTwoSymbols(oldMetersData?.cold_kitchen)
+        labelWaterKitchenHotOldTitle.text = TextProvider.roundTwoSymbols(oldMetersData?.hot_kitchen)
+        labelWaterBathColdOldTitle.text = TextProvider.roundTwoSymbols(oldMetersData?.cold_bath)
+        labelWaterBathHotOldTitle.text = TextProvider.roundTwoSymbols(oldMetersData?.hot_bath)
+        labelLightT1OldTitle.text = TextProvider.roundTwoSymbols(oldMetersData?.light_1)
+        labelLightT2OldTitle.text = TextProvider.roundTwoSymbols(oldMetersData?.light_2)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,22 +112,29 @@ class DetailMeterVC: BaseVC {
         labelMonth.text = TextProvider.getMonthTitle(Int64(currentMonth))
         stepperMonth.value = Double(currentMonth)
         
-        labelWaterKitchenColdOldTitle.text = ""
-        labelWaterKitchenHotOldTitle.text = ""
-        labelWaterBathColdOldTitle.text = ""
-        labelWaterBathHotOldTitle.text = ""
-        labelLightT1OldTitle.text = ""
-        labelLightT2OldTitle.text = ""
+        if let md = currentMetersData {
+            set(metersData: md)
+            set(oldMetersData: md)
+        } else {
+            set(oldMetersData: nil)
+        }
     }
     
     override func style() {
         super.style()
         
-        let barButtonItem = UIBarButtonItem(title: TextProvider.save(), style: .done, target: self, action: #selector(saveHandler))
+        let barButtonItem = UIBarButtonItem(title: state == .new ? TextProvider.save() : TextProvider.delete(), style: .done, target: self, action: #selector(saveOrDelHandler))
         navigationItem.setRightBarButton(barButtonItem, animated: false)
         
-        buttonSend.backgroundColor = ColorProvider.greenLight
-        buttonSend.tintColor = ColorProvider.greenDark
+        if state == .new {
+            buttonSendOrEdit.setTitle(TextProvider.send(), for: .normal)
+            buttonSendOrEdit.backgroundColor = ColorProvider.greenLight
+            buttonSendOrEdit.tintColor = ColorProvider.greenDark
+        } else {
+            buttonSendOrEdit.setTitle(TextProvider.edit(), for: .normal)
+            buttonSendOrEdit.backgroundColor = ColorProvider.orangeLight
+            buttonSendOrEdit.tintColor = ColorProvider.orangeDark
+        }
         
         for textField in textFields {
             textField.keyboardType = .decimalPad
@@ -104,35 +154,16 @@ class DetailMeterVC: BaseVC {
     @IBAction func loadLastSaveHandler(_ sender: Any) {
         if let md = MetersDataInteractor.getLast() {
             lastMetersData = md
-            
             fillLastValue(isValue: true)
-            
-            textFieldWaterKitchenCold.text = TextProvider.roundTwoSymbols(md.cold_kitchen)
-            stepperWaterKitchenCold.value = md.cold_kitchen ?? 0
-            textFieldWaterKitchenHot.text = TextProvider.roundTwoSymbols(md.hot_kitchen)
-            stepperWaterKitchenHot.value = md.hot_kitchen ?? 0
-            
-            textFieldWaterBathCold.text = TextProvider.roundTwoSymbols(md.cold_bath)
-            stepperWaterBathCold.value = md.cold_bath ?? 0
-            textFieldWaterBathHot.text = TextProvider.roundTwoSymbols(md.hot_bath)
-            stepperWaterBathHot.value = md.hot_bath ?? 0
-            
-            textFieldLightT1.text = TextProvider.roundTwoSymbols(md.light_1)
-            stepperLightT1.value = md.light_1 ?? 0
-            textFieldLightT2.text = TextProvider.roundTwoSymbols(md.light_2)
-            stepperLightT2.value = md.light_2 ?? 0
+            set(metersData: md)
         }
     }
     
     func fillLastValue(isValue: Bool) {
         if let md = lastMetersData {
+            //is value or percent
             if isValue {
-                labelWaterKitchenColdOldTitle.text = TextProvider.roundTwoSymbols(md.cold_kitchen)
-                labelWaterKitchenHotOldTitle.text = TextProvider.roundTwoSymbols(md.hot_kitchen)
-                labelWaterBathColdOldTitle.text = TextProvider.roundTwoSymbols(md.cold_bath)
-                labelWaterBathHotOldTitle.text = TextProvider.roundTwoSymbols(md.hot_bath)
-                labelLightT1OldTitle.text = TextProvider.roundTwoSymbols(md.light_1)
-                labelLightT2OldTitle.text = TextProvider.roundTwoSymbols(md.light_2)
+                set(oldMetersData: md)
             } else {
                 
             }
@@ -149,6 +180,7 @@ class DetailMeterVC: BaseVC {
             currentYear += 1
             labelYear.text = "\(currentYear)"
         }
+        currentMonth = Int(stepper.value)
         labelMonth.text = TextProvider.getMonthTitle(Int64(stepper.value))
     }
     
@@ -159,23 +191,44 @@ class DetailMeterVC: BaseVC {
         }
     }
     
-    @IBAction func sendHandler(_ sender: Any) {
-        sendEmail()
+    @IBAction func sendOrEditHandler(_ sender: Any) {
+        if state == .new {
+            sendEmail()
+        } else {
+            if let md = currentMetersData {
+                md.year = Int64(currentYear)
+                md.month = Int64(currentMonth)
+                md.cold_kitchen = textFieldWaterKitchenCold.value()
+                md.hot_kitchen = textFieldWaterKitchenHot.value()
+                md.cold_bath = textFieldWaterBathCold.value()
+                md.hot_bath = textFieldWaterBathHot.value()
+                md.light_1 = textFieldLightT1.value()
+                md.light_2 = textFieldLightT2.value()
+                MetersDataInteractor.update(md: md)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
-    @objc func saveHandler() {
-        let md = MetersData()
-        md.year = Int64(currentYear)
-        md.month = Int64(currentMonth)
-        md.cold_kitchen = textFieldWaterKitchenCold.value()
-        md.hot_kitchen = textFieldWaterKitchenHot.value()
-        md.cold_bath = textFieldWaterBathCold.value()
-        md.hot_bath = textFieldWaterBathHot.value()
-        md.light_1 = textFieldLightT1.value()
-        md.light_2 = textFieldLightT2.value()
-        md.creation_date = Int64(Date().timeIntervalSince1970)
-        
-        MetersDataInteractor.add(md: md)
+    @objc func saveOrDelHandler() {
+        if state == .new {
+            let md = MetersData()
+            md.year = Int64(currentYear)
+            md.month = Int64(currentMonth)
+            md.cold_kitchen = textFieldWaterKitchenCold.value()
+            md.hot_kitchen = textFieldWaterKitchenHot.value()
+            md.cold_bath = textFieldWaterBathCold.value()
+            md.hot_bath = textFieldWaterBathHot.value()
+            md.light_1 = textFieldLightT1.value()
+            md.light_2 = textFieldLightT2.value()
+            md.creation_date = Int64(Date().timeIntervalSince1970)
+            
+            MetersDataInteractor.add(md: md)
+        } else {
+            if let md = currentMetersData {
+                MetersDataInteractor.delete(md: md)
+            }
+        }
         
         self.navigationController?.popViewController(animated: true)
     }
@@ -239,7 +292,7 @@ extension DetailMeterVC: MFMailComposeViewControllerDelegate {
         if result == .sent {
             let alert = UIAlertController(title: TextProvider.alertSendedTitle(), message: TextProvider.alertSendedMsg(), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: TextProvider.ok(), style: .default) { [weak self] (alert) in
-                self?.saveHandler()
+                self?.saveOrDelHandler()
                 self?.navigationController?.popViewController(animated: true)
             })
             self.present(alert, animated: true, completion: nil)

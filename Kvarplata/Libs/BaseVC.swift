@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseVC: UIViewController {
+class AbstractVC: UIViewController {
     
     static var className: String {
         get {
@@ -20,9 +20,10 @@ class BaseVC: UIViewController {
         self.navigationController?.pushViewController(childVC, animated: animated)
     }
     
-    func showDetailMeterVC() -> DetailMeterVC? {
+    func showDetailMeterVC(metersData: MetersData? = nil) -> DetailMeterVC? {
         if let vc = UIStoryboard.init(name: DetailMeterVC.className, bundle: Bundle.main).instantiateViewController(withIdentifier: DetailMeterVC.className) as? DetailMeterVC {
             push(childVC: vc)
+            vc.currentMetersData = metersData
             return vc
         }
         return nil
@@ -134,4 +135,8 @@ class BaseVC: UIViewController {
             })
         }
     }
+}
+
+class BaseVC: AbstractVC {
+    
 }

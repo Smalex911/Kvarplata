@@ -10,6 +10,8 @@ import SQLite
 
 class MetersData {
     
+    public var id : Int64?
+    
     public var month : Int64?
     public var year : Int64?
     

@@ -33,4 +33,8 @@ class MetersData {
     public var price_light_2 : Double?
     
     public var is_sent_email : Bool?
+    
+    public var meters: [Double?] {
+        return [cold_kitchen, hot_kitchen, cold_bath, hot_bath, light_1, light_2]
+    }
 }

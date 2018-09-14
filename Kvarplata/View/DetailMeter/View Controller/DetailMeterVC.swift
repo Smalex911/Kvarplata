@@ -15,6 +15,10 @@ class DetailMeterVC: BaseVC {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var labelYear: UILabel!
+    @IBOutlet weak var labelMonth: UILabel!
+    @IBOutlet weak var stepperMonth: UIStepper!
+    
     @IBOutlet weak var labelWaterKitchenTitle: UILabel!
     @IBOutlet weak var labelWaterKitchenColdOldTitle: UILabel!
     @IBOutlet weak var labelWaterKitchenHotOldTitle: UILabel!
@@ -56,8 +60,14 @@ class DetailMeterVC: BaseVC {
         return 40
     }
     
+    var (currentMonth, currentYear) = TextProvider.getCurrentMonthAndYear()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        labelYear.text = "\(currentYear)"
+        labelMonth.text = TextProvider.getMonthTitle(Int64(currentMonth))
+        stepperMonth.value = Double(currentMonth)
         
         labelWaterKitchenColdOldTitle.text = ""
         labelWaterKitchenHotOldTitle.text = ""
@@ -70,9 +80,7 @@ class DetailMeterVC: BaseVC {
     override func style() {
         super.style()
         
-        title = TextProvider.titleAdd()
-        
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(saveHandler))
+        let barButtonItem = UIBarButtonItem(title: TextProvider.save(), style: .done, target: self, action: #selector(saveHandler))
         navigationItem.setRightBarButton(barButtonItem, animated: false)
         
         buttonSend.backgroundColor = ColorProvider.greenLight
@@ -80,6 +88,8 @@ class DetailMeterVC: BaseVC {
         
         for textField in textFields {
             textField.keyboardType = .decimalPad
+            textField.delegate = self
+            textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
         
         for stepper in steppers {
@@ -129,30 +139,23 @@ class DetailMeterVC: BaseVC {
         }
     }
     
-    @IBAction func stepperValueChangedHandler(_ sender: Any) {
-        if let stepper = sender as? UIStepper {
-            switch stepper {
-            case stepperWaterKitchenCold:
-                textFieldWaterKitchenCold.text = TextProvider.roundTwoSymbols(stepper.value)
-                break
-            case stepperWaterKitchenHot:
-                textFieldWaterKitchenHot.text = TextProvider.roundTwoSymbols(stepper.value)
-                break
-            case stepperWaterBathCold:
-                textFieldWaterBathCold.text = TextProvider.roundTwoSymbols(stepper.value)
-                break
-            case stepperWaterBathHot:
-                textFieldWaterBathHot.text = TextProvider.roundTwoSymbols(stepper.value)
-                break
-            case stepperLightT1:
-                textFieldLightT1.text = TextProvider.roundTwoSymbols(stepper.value)
-                break
-            case stepperLightT2:
-                textFieldLightT2.text = TextProvider.roundTwoSymbols(stepper.value)
-                break
-            default:
-                break
-            }
+    @IBAction func stepperMonthHandler(_ stepper: UIStepper) {
+        if stepper.value < 1 {
+            stepper.value = 12
+            currentYear -= 1
+            labelYear.text = "\(currentYear)"
+        } else if stepper.value > 12 {
+            stepper.value = 1
+            currentYear += 1
+            labelYear.text = "\(currentYear)"
+        }
+        labelMonth.text = TextProvider.getMonthTitle(Int64(stepper.value))
+    }
+    
+    @IBAction func stepperValueChangedHandler(_ stepper: UIStepper) {
+        if let textField = textFields.first(where: {$0.tag == stepper.tag}) {
+            textField.text = TextProvider.roundTwoSymbols(stepper.value)
+            textField.backgroundColor = UIColor.white
         }
     }
     
@@ -162,8 +165,8 @@ class DetailMeterVC: BaseVC {
     
     @objc func saveHandler() {
         let md = MetersData()
-        md.year = 2018
-        md.month = 8
+        md.year = Int64(currentYear)
+        md.month = Int64(currentMonth)
         md.cold_kitchen = textFieldWaterKitchenCold.value()
         md.hot_kitchen = textFieldWaterKitchenHot.value()
         md.cold_bath = textFieldWaterBathCold.value()
@@ -245,5 +248,24 @@ extension DetailMeterVC: MFMailComposeViewControllerDelegate {
             alert.addAction(UIAlertAction(title: TextProvider.great(), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+    }
+}
+
+extension DetailMeterVC: UITextFieldDelegate {
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField.value() != nil {
+            textField.backgroundColor = UIColor.white
+        } else {
+            textField.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+        }
+        
+        if let stepper = steppers.first(where: {$0.tag == textField.tag}) {
+            stepper.value = textField.value() ?? lastMetersData?.meters[textField.tag] ?? 0
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
     }
 }

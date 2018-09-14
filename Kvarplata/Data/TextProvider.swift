@@ -6,6 +6,8 @@
 //  Copyright © 2018 Александр Смородов. All rights reserved.
 //
 
+import UIKit
+
 class TextProvider {
     
     static func getMonthTitle(_ month: Int64?) -> String {
@@ -14,6 +16,16 @@ class TextProvider {
         }
         let arrayMonths = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
         return arrayMonths[month-1]
+    }
+    
+    static func getCurrentMonthAndYear() -> (Int, Int) {
+        let date = Date()
+        let calendar = Calendar.current
+        
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        
+        return (month, year)
     }
     
     static func roundTwoSymbols(_ number: Double?) -> String {
@@ -31,8 +43,8 @@ class TextProvider {
         return "Изменение"
     }
     
-    static func titleAdd() -> String {
-        return "Добавление"
+    static func save() -> String {
+        return "Сохранить"
     }
     
     static func alertSendedTitle() -> String {

@@ -6,5 +6,9 @@ target 'Kvarplata' do
   use_frameworks!
 
   pod 'SQLite.swift', '~> 0.11.5'
+  pod 'Firebase/Core'
+  
+  pod 'Fabric', '~> 1.7.11'
+  pod 'Crashlytics', '~> 3.10.7'
 
 end
